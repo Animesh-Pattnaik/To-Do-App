@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+  <title>Todo App</title>
+  <link rel="stylesheet" href="/static/stylesheets/style2.css" type="text/css" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+    crossorigin="anonymous"
+  />
+</head>
+<body>
+  <div class="data-container">
+    <h2>Blog</h2>
+    <div class="todo">
+      <form action="/" method="POST" class="todo-header">
+        <div class="divide">
+            <input type="text" name="title" id="title" placeholder="Enter your title">
+            <button type="submit">Post</button>
+        </div>
+            <input type="text" name="content" id="content" placeholder="Enter your task">
+        </form>
+        <div class="h-divider">
+            <div class="shadow"></div>
+            <div class="text2"><img src="https://t1.gstatic.com/images?q=tbn:ANd9GcQsmMfybMIwoE5etmOIAuvnFWdfv_8C1Bq15urJFqwhhI55FyYNP2YuUA" /></div>
+        </div>
+      <ul class="todo-list">
+        <% todoTasks.forEach(details => { %> <% if (details._id == idTask) { %>
+        <li class="todo-list-item">
+          <form action="/edit/<%= details._id %>" method="POST" class="editdata">
+            <div class="group2">
+              <div class="group3">
+              <input type="text" value="<%= details.title %>" name="title" />
+              <input type="text" value="<%= details.content %>" name="content" /></div>
+              </div>
+              <div class="link2">
+                <button type="submit">Confirm</button>
+                <a href="/" class="cancel">
+                    <span>Cancel</span>
+                </a>
+                </div> 
+            </div>
+          </form>
+        </li>
+        <% } else { %>
+          <li class="todo-list-item">
+            <div class="group">
+                <div class="todo-list-item-name"><%= details.title %></div>
+
+                <div class="link">
+                <a href="/edit/<%= details._id %>" class="edit">
+                    <span>Edit</span>
+                </a>
+                <a href="/remove/<%= details._id %>" class="remove">
+                    <span>Delete</span>
+                </a>
+                </div>
+                
+            </div>
+                <div class="todo-list-item-name"><%= details.content %></div>
+            </li>
+        <% } %> <% }) %>
+      </ul>
+    </div>
+  </div>
+</body>
